@@ -1,11 +1,11 @@
 const { resolve } = require('path');
 const {ManagerConfig} = require('sqliteplus')
 
-const Configuration = new ManagerConfig({
+const GameConfiguration = new ManagerConfig({
     defaultFileStorage: resolve(__dirname, 'database'),
 });
 
-Configuration.addDatabase('accounts', {
+GameConfiguration.addDatabase('accounts', {
     createIfNotExists: true,
     models: [
         [
@@ -42,7 +42,7 @@ Configuration.addDatabase('accounts', {
     ]
 });
 
-Configuration.addDatabase('games', {
+GameConfiguration.addDatabase('games', {
     createIfNotExists: true,
     models: [
         [
@@ -60,4 +60,4 @@ Configuration.addDatabase('games', {
     ]
 });
 
-module.exports = Configuration;
+module.exports = GameConfiguration

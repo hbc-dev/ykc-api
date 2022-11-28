@@ -4,9 +4,13 @@ const resolveDir = require('./utils/resolveDir');
 
 const {API} = require('./structures/API');
 const ykc_api = new API({
-    routesPath: './routes'
+    routesPath: './routes',
+    middlewarePath: './middleware',
 });
 
-ykc_api.enableRoutes().connect(0, () => {
-    console.log(`Go here: http://localhost:xxx/`);
+ykc_api
+.enableMiddleware()
+.enableRoutes()
+.connect(3000, () => {
+    console.log(`Go here: http://localhost:3000/`);
 });

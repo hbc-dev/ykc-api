@@ -17,7 +17,7 @@ interface RouteOptions {
 
 export class Route {
     public name: string;
-    public route: string;
+    public route?: string;
     public action?: RouteAction;
     public type?: types = 'get';
 

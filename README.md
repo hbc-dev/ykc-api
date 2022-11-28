@@ -12,7 +12,7 @@
 </a>
 
 # Yo-Kai Cards API
-Welcome to the API of Yo-Kai Cards. You can obviously how your information are used in this repository.
+Welcome to the API of Yo-Kai Cards. You can obviously see how your information are used in this repository.
 
 In any time, we can made private this repository.
 

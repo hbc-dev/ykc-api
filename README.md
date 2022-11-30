@@ -37,7 +37,7 @@ Route to get accounts.
 | Property | Description | Required
 | - | - | - |
 | id | The id of the user to get his account. If the id wasn't provided, the API return all accounts | ❌
-| limit | The number of accounts to return. If the id was provided, this limit won't work | ✅
+| limit | The number of accounts to return. If the id was provided, this limit won't work | ❌
 
 ## AccountsCreate => `/oauth/accounts/create`
 Route to create accounts.

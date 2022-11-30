@@ -1,6 +1,6 @@
 {
   "name": "ykc-api",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "The API Rest of Yo-Kai Cards",
   "main": "src/index.js",
   "scripts": {
@@ -13,9 +13,12 @@
   "dependencies": {
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "nodemailer": "^6.8.0",
     "sqliteplus": "^3.2.1"
   },
   "devDependencies": {
-    "@types/node": "^18.11.9"
+    "@types/axios": "^0.14.0",
+    "@types/node": "^18.11.9",
+    "axios": "^1.2.0"
   }
 }

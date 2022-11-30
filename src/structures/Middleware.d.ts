@@ -6,6 +6,7 @@ interface MiddlewareActionProps {
     response: Response;
     request: Request;
     next: NextFunction;
+    cache: Map<string, any>
 }
 
 interface MiddlewareOptions {

@@ -18,4 +18,36 @@ In any time, we can made private this repository.
 
 ![](https://media.discordapp.net/attachments/941714539018321961/1034182743476670495/2140_sin_titulo_20221024211233.png?width=453&height=659)
 
+# Endpoints
+
+## Base => `http://localhost:3000/`
+Redirect to the [Yo-Kai World](https://discord.gg/yokaiworld) server in Discord.
+
+## Oauth => `/oauth/`
+Middleware to give access to the API.
+Requires the body.
+
+| Property | Description | Required |
+| - | - | - |
+| token | The token to access to the API | ✅
+
+## Accounts => `/oauth/accounts/:id?limit=number`
+Route to get accounts.
+
+| Property | Description | Required
+| - | - | - |
+| id | The id of the user to get his account. If the id wasn't provided, the API return all accounts | ❌
+| limit | The number of accounts to return. If the id was provided, this limit won't work | ✅
+
+## AccountsCreate => `/oauth/accounts/create`
+Route to create accounts.
+Requires the body.
+
+| Property | Description | Required
+| - | - | - |
+| mail | The mail of the user | ✅
+| password | The mail of the user | ✅
+| username | The username of the user | ✅
+| language | The language of the user | ❌
+
 Yo-Kai Cards ©

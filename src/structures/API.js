@@ -3,7 +3,7 @@ const express = require('express');
 const APIError = require('../utils/APIError');
 
 class API {
-    constructor({routesPath, middlewarePath, app} = {}) {
+    constructor({routesPath, middlewarePath, app, enableBody} = {}) {
         Object.defineProperties(this, {
             routes: {
                 writable: false,
@@ -15,11 +15,22 @@ class API {
                 enumerable: true,
                 value: middlewarePath ? handleFiles(middlewarePath) : new Map()
             },
+            enableBody: {
+                writable: false,
+                enumerable: true,
+                value: enableBody ? true : false
+            },
             App: {
                 writable: false,
                 value: app ?? express()
+            },
+            cache: {
+                writable: false,
+                value: new Map()
             }
         });
+
+        if (this.enableBody) this.App.use(express.json());
     }
 
     // TODO: add path option
@@ -29,7 +40,10 @@ class API {
         for (let {name, route, action, type} of this.routes.values()) {
             if (exclude.includes(name) || exclude.includes(route)) continue;
 
-            this.App[type](route ?? '/'+name, (req, res) => action({request: req, response: res}));
+            this.App[type](
+                route ?? '/'+name,
+                (req, res) => action({request: req, response: res, cache: this.cache})
+            );
         }
 
         return this;
@@ -42,7 +56,10 @@ class API {
         for (let {name, route, action} of this.middleware.values()) {
             if (exclude.includes(name) || exclude.includes(route)) continue;
 
-            this.App.use(route ?? '/'+name, (request, response, next) => action({request, response, next}));
+            this.App.use(
+                route ?? '/'+name,
+                (request, response, next) => action({request, response, next, cache: this.cache})
+            );
         }
 
         return this;

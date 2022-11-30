@@ -1,11 +1,11 @@
 require('dotenv').config({path: '../.env'});
 
-const resolveDir = require('./utils/resolveDir');
-
+const express = require('express');
 const {API} = require('./structures/API');
 const ykc_api = new API({
     routesPath: './routes',
     middlewarePath: './middleware',
+    enableBody: true
 });
 
 ykc_api

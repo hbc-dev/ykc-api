@@ -5,10 +5,10 @@ module.exports = new Middleware({
     name: 'oauth',
     route: '/oauth',
     action: ({response, request, next}) => {
-        let {query} = request;
+        let {body} = request;
 
-        if (query?.password !== process.env.PASSWORD)
-            return response.status(502).jsonp({message: 'The name or the password are wrong'});
+        if (body?.token !== process.env.TOKEN)
+            return response.status(401).jsonp({message: 'This token is invalid'});
 
         else next();
     }

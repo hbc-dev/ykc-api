@@ -6,7 +6,7 @@ type types = 'get' | 'post' | 'put' | 'delete';
 interface RouteActionProps {
     response: Response;
     request: Request;
-    cache: Map<string, any>
+    cache: Map<string, string | number | Map<string, any>>
 }
 
 interface RouteOptions {

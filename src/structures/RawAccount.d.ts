@@ -9,7 +9,10 @@ interface RawAccountProps {
 export class RawAccount {
     readonly mail: string;
     readonly username: string;
-    readonly language?: Languages = "es";
+    readonly language: Languages = "es";
+    readonly id: string;
+    readonly createdAt: string;
+    readonly token: string;
 
     constructor(options: RawAccountProps)
 }

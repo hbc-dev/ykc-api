@@ -8,6 +8,8 @@ const ykc_api = new API({
     enableBody: true
 });
 
+ykc_api.cache.set('logins', new Map());
+
 ykc_api
 .enableMiddleware()
 .enableRoutes()

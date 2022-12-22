@@ -1,0 +1,15 @@
+{
+    "createAccount" : {
+        "mail" : "",
+        "password" : "",
+        "username" : ""
+    },
+    "notifications" : {
+        "NOTIFICATIONS" : false,
+        "NOTICES" : false
+    },
+    "login" : {
+        "DiscordUsername" : "",
+        "DiscordUserId" : ""
+    }
+}

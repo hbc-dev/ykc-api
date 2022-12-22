@@ -24,7 +24,7 @@ module.exports = new Route({
             let getter = manager.all(["Accounts"]);
             let {limit} = query;
 
-            if (typeof parseInt(limit) == 'number')
+            if (!isNaN(parseInt(limit)))
                 getter.length = Math.min(getter.length, parseInt(limit));
 
             return response.status(200).json(getter)

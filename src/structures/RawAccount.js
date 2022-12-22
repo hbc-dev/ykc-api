@@ -2,7 +2,7 @@ const { randomBytes } = require('crypto');
 const APIError = require('../utils/APIError');
 
 class RawAccount {
-    constructor({mail, username, language = 'es'} = {}) {
+    constructor({mail, username, language = 'es'}) {
         if (typeof mail !== 'string') throw new APIError('The mail property must be a string');
         if (typeof username !== 'string') throw new APIError('The username property must be a string');
         if (typeof language !== 'string') throw new APIError('The language property must be a string');

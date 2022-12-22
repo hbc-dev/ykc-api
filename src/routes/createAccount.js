@@ -1,14 +1,10 @@
-const {randomBytes} = require('node:crypto');
 const { Route } = require("../structures/Route");
 const manager = require('../data/manager');
 const sendMail = require('../utils/sendMail');
 const checkKeys = require('../utils/checkKeys');
 const { RawAccount } = require('../structures/RawAccount');
-const scheme = {
-    username: null,
-    password: null,
-    mail: null,
-}
+const Notify = require("../utils/Notify");
+const scheme = require('../data/json/schemes.json').createAccount;
 
 module.exports = new Route({
     name: 'createAccount',
@@ -27,8 +23,12 @@ module.exports = new Route({
             if (query.code !== inCache.code) return response.status(400).json({message: `The code isn't equal`, code: inCache.code});
 
             let account = new RawAccount(inCache);
+            let configuration = {id: account.id, ...body.configuration ?? {}}
+
             manager.insert(["Accounts", {password: inCache.password, ...account}]);
+            manager.insert(["Configuration", configuration]);
             cache.delete(body.mail);
+            cache.get('logins').set(account.id, account);
 
             return response.status(201).json(account);
         }
@@ -51,18 +51,19 @@ module.exports = new Route({
             let {username, password, language, mail} = body;
             let code = Math.floor(Math.random() * (6000 - 1000 + 1) + 1000).toString();
 
-            let verification_code_html = require('../data/html/VERIFICATION_CODE')
-            .replace('{username}', username)
-            .replace('{code}', code);
-
             cache.set(mail, {
                 username, password, language, mail, code
             });
 
-            sendMail({
-                to: mail,
+            Notify({
+                mail,
+                context: 'VERIFICATION_CODE',
+                enabled: true,
                 subject: `YKC - Código de verificación`,
-                html: verification_code_html
+                replace: {
+                    "{username}" : username,
+                    "{code}" : code
+                }
             });
 
             response.status(200).send({code});
